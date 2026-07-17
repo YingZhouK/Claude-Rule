@@ -139,7 +139,6 @@ cfg = robot_utils.get_matched_profile(PROFILES)
 - **JSON 解析安全**: `resp.json()` 必须包裹在 `try-except` 中捕获 `ValueError`。
 ### 6.3 严格空值判断
 - **禁止隐式判断**: 严禁使用 `if not result:`,应使用 `if result is None:`。
-测试
 ---
 ## 8. 接口设计与复用规范
 ### 8.1 参数最小化
