@@ -74,12 +74,18 @@ curl -s -X POST http://127.0.0.1:8077/bmc/rdm/<新增/修改的路由> \
 | 鉴权方式 | Bearer Token (Header: Authorization) |
 | 登录字段 | `username` + `password`|
 
-## 调试环境配置 (⚠️ 临时修改, 提交前必须还原)
+## 调试环境配置 (⚠️ 临时修改，仅提交时处理)
 
-本地调试依赖远程数据库和 Artifactory 时, `configs/config.yaml` 需临时修改以下配置, **提交代码时必须还原**:
+本地调试依赖远程数据库和 Artifactory 时, `configs/config.yaml` 需临时修改数据库 host 和密码（指向远程）。
+
+**规则**:
+- 调试/验证阶段 **不要** 主动还原 configs/config.yaml — 用户可能还在调试流程中
+- 提交代码时，检查本次变更是否涉及 configs/config.yaml 的实质性修改:
+  - 若只是临时调试改的 host/密码，**不要提交该文件**（`git checkout configs/config.yaml` 还原后不 add，或直接不 add 该文件）
+  - 若确实有 config 相关的新增/修改，保留业务变更部分，手动去掉调试 host/密码后提交
 
 ```bash
-# 还原命令
+# 提交前：只还原调试配置，保留其他可能的业务变更
 git checkout configs/config.yaml
 ```
 
